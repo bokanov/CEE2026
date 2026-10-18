@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-party-admin}
+      STARTING_BALANCE: ${STARTING_BALANCE:-500}
+      ALLOW_REGISTRATION_WITHOUT_PHOTO: ${ALLOW_REGISTRATION_WITHOUT_PHOTO:-false}
+      DATA_DIR: /app/data
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
