@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -21,8 +22,8 @@ export default function PlayLobbyPage() {
 
   if (loading) {
     return (
-      <main className="flex min-h-screen items-center justify-center text-white/60">
-        Loading…
+      <main className="flex min-h-screen items-center justify-center text-snow-100/60">
+        Loading… ❄️
       </main>
     );
   }
@@ -31,7 +32,7 @@ export default function PlayLobbyPage() {
     return (
       <main className="mx-auto max-w-lg px-5 py-10 text-center">
         <SiteHeader title="Not registered" />
-        <p className="mb-6 text-white/70">Register first to get your chips.</p>
+        <p className="mb-6 text-snow-100/80">Register first to get your chips.</p>
         <Link href="/register" className="btn-gold inline-block">
           Register now
         </Link>
@@ -42,28 +43,44 @@ export default function PlayLobbyPage() {
   return (
     <main className="mx-auto min-h-screen max-w-lg px-5 py-10">
       <SiteHeader title={`Hi, ${me.name}!`} subtitle="Pick a game — chips update live on the TV." />
-      <div className="mb-6 rounded-2xl border border-gold-500/30 bg-pine-900/70 p-5 text-center animate-pulse-glow">
-        <p className="text-sm uppercase tracking-widest text-white/60">Your balance</p>
-        <p className="font-display text-4xl font-bold text-gold-400">
-          {me.balance.toLocaleString()} <span className="text-2xl">🪙</span>
+      <div className="mb-6 rounded-2xl border-2 border-cranberry-500/40 bg-holly-900/75 p-5 text-center animate-pulse-glow">
+        <p className="text-sm uppercase tracking-widest text-snow-100/60">Your balance</p>
+        <p className="font-display text-4xl font-bold text-gold-300">
+          {me.balance.toLocaleString()} <span className="text-2xl">🎁</span>
         </p>
       </div>
       <div className="grid gap-4">
         <Link
           href="/play/slots"
-          className="glass rounded-2xl p-6 transition hover:bg-white/10"
+          className="glass flex items-center gap-4 rounded-2xl p-6 transition hover:border-gold-400/40 hover:bg-holly-800/50"
         >
-          <p className="text-2xl">🎰</p>
-          <p className="mt-2 font-semibold text-gold-400">Holiday Slots</p>
-          <p className="text-sm text-white/60">Match symbols for multipliers</p>
+          <Image
+            src="/images/christmas-tree.jpg"
+            alt=""
+            width={64}
+            height={80}
+            className="h-16 w-12 shrink-0 rounded-lg object-cover"
+          />
+          <div>
+            <p className="font-semibold text-gold-300">Holiday Slots</p>
+            <p className="text-sm text-snow-100/60">Match trees, Santas &amp; snowflakes</p>
+          </div>
         </Link>
         <Link
           href="/play/coin-flip"
-          className="glass rounded-2xl p-6 transition hover:bg-white/10"
+          className="glass flex items-center gap-4 rounded-2xl p-6 transition hover:border-gold-400/40 hover:bg-holly-800/50"
         >
-          <p className="text-2xl">🪙</p>
-          <p className="mt-2 font-semibold text-gold-400">Coin Flip</p>
-          <p className="text-sm text-white/60">50/50 — double or nothing</p>
+          <Image
+            src="/images/santa.jpg"
+            alt=""
+            width={64}
+            height={80}
+            className="h-16 w-12 shrink-0 rounded-lg object-cover"
+          />
+          <div>
+            <p className="font-semibold text-gold-300">Santa or Snow?</p>
+            <p className="text-sm text-snow-100/60">50/50 — double or nothing</p>
+          </div>
         </Link>
       </div>
     </main>

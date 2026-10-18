@@ -51,7 +51,7 @@ export default function RegisterPage() {
 
   return (
     <main className="mx-auto min-h-screen max-w-lg px-5 py-10">
-      <SiteHeader title="Join the table" subtitle="Name + selfie for the leaderboard" />
+      <SiteHeader title="Join the game night" subtitle="Name + selfie for the TV leaderboard" />
       <form onSubmit={onSubmit} className="glass animate-slide-up space-y-5 rounded-2xl p-6">
         <label className="block">
           <span className="text-sm text-white/70">Your name</span>

@@ -1,7 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+
+const SIDES = [
+  { id: "heads" as const, label: "Santa", emoji: "🎅" },
+  { id: "tails" as const, label: "Snow", emoji: "❄️" },
+];
 
 export default function CoinFlipPage() {
   const [balance, setBalance] = useState(0);
@@ -37,10 +43,11 @@ export default function CoinFlipPage() {
         return;
       }
       setBalance(data.balance);
+      const sideLabel = data.side === "heads" ? "Santa 🎅" : "Snow ❄️";
       setResult(
         data.won
-          ? `🎉 ${data.side}! You won ${data.payout} chips!`
-          : `💫 It was ${data.side}. You lost ${bet} chips.`,
+          ? `🎉 ${sideLabel}! You won ${data.payout} chips!`
+          : `It was ${sideLabel}. You lost ${bet} chips.`,
       );
     } catch {
       setResult("Network error");
@@ -51,34 +58,46 @@ export default function CoinFlipPage() {
 
   return (
     <main className="mx-auto min-h-screen max-w-lg px-5 py-8">
-      <Link href="/play" className="text-sm text-gold-400">← Lobby</Link>
-      <h1 className="mt-4 font-display text-3xl text-gold-400">Coin Flip</h1>
-      <p className="text-white/60">Balance: {balance.toLocaleString()} 🪙</p>
+      <Link href="/play" className="text-sm text-gold-300 hover:text-gold-400">
+        ← Lobby
+      </Link>
+      <div className="mt-4 flex items-center gap-3">
+        <Image
+          src="/images/santa.jpg"
+          alt=""
+          width={56}
+          height={72}
+          className="h-14 w-11 rounded-lg object-cover ring-2 ring-cranberry-500/50"
+        />
+        <h1 className="font-display text-3xl festive-title">Santa or Snow?</h1>
+      </div>
+      <p className="text-snow-100/70">Balance: {balance.toLocaleString()} 🎁</p>
       <div className="mt-8 flex gap-3">
-        {(["heads", "tails"] as const).map((side) => (
+        {SIDES.map((side) => (
           <button
-            key={side}
+            key={side.id}
             type="button"
-            onClick={() => setChoice(side)}
-            className={`flex-1 rounded-xl border py-4 capitalize ${
-              choice === side
-                ? "border-gold-500 bg-gold-500/20 text-gold-400"
-                : "border-white/15 bg-pine-900/60"
+            onClick={() => setChoice(side.id)}
+            className={`flex-1 rounded-xl border py-4 transition ${
+              choice === side.id
+                ? "border-gold-400 bg-gold-400/20 text-gold-300 shadow-[0_0_20px_rgba(250,204,21,0.25)]"
+                : "border-holly-600/50 bg-holly-900/70 text-snow-100/80"
             }`}
           >
-            {side}
+            <span className="text-3xl">{side.emoji}</span>
+            <p className="mt-1 text-sm font-semibold">{side.label}</p>
           </button>
         ))}
       </div>
       <label className="mt-6 block">
-        <span className="text-sm text-white/70">Bet amount</span>
+        <span className="text-sm text-snow-100/70">Bet amount</span>
         <input
           type="number"
           min={1}
           max={balance}
           value={bet}
           onChange={(e) => setBet(parseInt(e.target.value, 10) || 1)}
-          className="mt-2 w-full rounded-xl border border-white/15 bg-pine-900/80 px-4 py-3 text-lg"
+          className="mt-2 w-full rounded-xl border border-cranberry-500/30 bg-holly-900/80 px-4 py-3 text-lg outline-none ring-gold-400/40 focus:ring-2"
         />
       </label>
       <button
@@ -87,9 +106,9 @@ export default function CoinFlipPage() {
         disabled={loading || balance < 1}
         className="btn-gold mt-4 w-full disabled:opacity-40"
       >
-        {loading ? "Flipping…" : "Flip!"}
+        {loading ? "Flipping…" : "❄️ Flip!"}
       </button>
-      {result ? <p className="mt-6 text-center text-lg text-gold-400">{result}</p> : null}
+      {result ? <p className="mt-6 text-center text-lg text-gold-300">{result}</p> : null}
     </main>
   );
 }

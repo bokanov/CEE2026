@@ -1,6 +1,6 @@
-# Christmas Casino Night
+# Christmas Eve Eve Game Night
 
-A local-network party app: guests register on their phones, play casino-style games for virtual chips, and compete on a **TV leaderboard**. The host uses an **admin panel** to adjust balances after physical games.
+A local-network party app for **December 23**: guests register on their phones, play holiday games for virtual chips, and compete on a **TV leaderboard**. The host uses an **admin panel** to adjust balances after physical games.
 
 ## Quick start (Docker — recommended)
 

@@ -1,8 +1,8 @@
-export const SLOT_SYMBOLS = ["🍒", "🍋", "⭐", "7️⃣", "🎁", "❄️"] as const;
+export const SLOT_SYMBOLS = ["🎄", "🎅", "⭐", "🔔", "🎁", "❄️"] as const;
 
 /** Weighted random symbol for slots */
 export function spinSlotReel(): string {
-  const weights = [30, 25, 20, 8, 10, 7];
+  const weights = [28, 22, 18, 12, 12, 8];
   const total = weights.reduce((a, b) => a + b, 0);
   let r = Math.random() * total;
   for (let i = 0; i < SLOT_SYMBOLS.length; i++) {
@@ -29,12 +29,15 @@ export function playSlots(bet: number): SlotResult {
   let message = "No match — better luck next spin!";
 
   if (a === b && b === c) {
-    if (a === "7️⃣") {
+    if (a === "⭐") {
       payout = bet * 10;
-      message = "JACKPOT! Triple 7s!";
+      message = "STAR JACKPOT! Triple stars!";
     } else if (a === "🎁") {
       payout = bet * 6;
       message = "Triple presents!";
+    } else if (a === "🎅") {
+      payout = bet * 8;
+      message = "Santa sighting! Triple Santas!";
     } else {
       payout = bet * 4;
       message = "Triple match!";
